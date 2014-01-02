@@ -1,5 +1,5 @@
 #!/bin/bash
-function copying
+function copyright_notice
 {
     echo 'alternatives – Simple tool for administrating /etc/alternatives'
     echo
@@ -37,7 +37,7 @@ if [ ${#} = 1 ]; then
 	exit 0
     elif [[ "${1}" = @("copying"|"--copying"|"-copying"|"-c") ]]; then
 	echo ; echo
-	copying
+	copyright_notice
 	echo ; echo
 	exit 0
     elif [ "${1}" = "list" ]; then
