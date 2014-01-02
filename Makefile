@@ -20,8 +20,9 @@ all: alternatives
 
 alternatives: alternatives.bash
 	cp "$<" "$@"
-	sed -i 's:/alternatives.providers:$(PROVIDERS):g' "$@"
+	sed -i 's:/alternatives\.providers:$(PROVIDERS):g' "$@"
 	sed -i 's:/alternatives:$(ALTERNATIVES):g' "$@"
+	sed -i 's:/$(shell echo "$(ALTERNATIVES)" | sed -e 's:\.:\\\.:g')\.:/alternatives\.:g' "$@"
 	sed -i 's:/etc:$(SYSCONFDIR):g' "$@"
 
 
