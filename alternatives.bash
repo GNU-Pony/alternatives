@@ -50,7 +50,7 @@ elif [ ${#} = 2 ]; then
 	    ev=0
 	    ls -1 "${PROVIDERS}/${2}" |
 	    while read -r provider; do
-		if [ -f "${PROVIDERS}/${2}/${provider}" ]; then
+		if [ -e "${PROVIDERS}/${2}/${provider}" ]; then
 		    echo "${provider} -> $(realpath "${PROVIDERS}/${2}/${provider}")"
 		elif [ -L "${PROVIDERS}/${2}/${provider}" ]; then
 		    echo "${0}: The symlink ${PROVIDERS}/${2}/${provider} is broken" >&2
@@ -69,7 +69,7 @@ elif [ ${#} = 2 ]; then
 	fi
     elif [ "${1}" = "get" ]; then
 	if [ -L "${ALTERNATIVES}/${2}" ]; then
-	    if [ -f "${ALTERNATIVES}/${2}" ]; then
+	    if [ -e "${ALTERNATIVES}/${2}" ]; then
 		provider="$(readlink "${ALTERNATIVES}/${2}")"
 		echo "$(basename "${provider}") -> $(realpath ${provider})"
 		exit 0
@@ -77,7 +77,7 @@ elif [ ${#} = 2 ]; then
 		echo "${0}: The symlink ${ALTERNATIVES}/${2} is broken" >&2
 		exit 2
 	    fi
-	elif [ -f "${ALTERNATIVES}/${2}" ]; then
+	elif [ -e "${ALTERNATIVES}/${2}" ]; then
 	    echo "${0}: ${ALTERNATIVES}/${2} is not a symlink" >&2
 	    exit 3
 	else
@@ -93,7 +93,7 @@ elif [ ${#} = 3 ]; then
 	elif [ ! -L "${PROVIDERS}/${2}/${3}" ]; then
 	    echo "${0}: ${2}/${3} does not exist in ${PROVIDERS}" >&2
 	    exit 1
-	elif [ ! -f "${PROVIDERS}/${2}/${3}" ]; then
+	elif [ ! -e "${PROVIDERS}/${2}/${3}" ]; then
 	    echo "${0}: The symlink ${PROVIDERS}/${2}/${3} is broken" >&2
 	    exit 2
 	elif [ -e "${ALTERNATIVES}/${2}" ] && [ ! -L "${ALTERNATIVES}/${2}" ]; then
