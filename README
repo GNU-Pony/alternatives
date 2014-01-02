@@ -1,0 +1,5 @@
+A simple tool for administrating /etc/alternatives
+using the GNU/Pony filesystem hierarchy. The lets
+you select which package that should provide at
+specific command.
+
