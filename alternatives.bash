@@ -100,7 +100,7 @@ elif [ ${#} = 3 ]; then
 	    echo "${0}: ${ALTERNATIVES}/${2} is not a symlink" >&2
 	    exit 3
 	else
-	    ln -sf "${REL_PROVIDERS}/${2}/{$3}" "${ALTERNATIVES}/${2}" || exit 4
+	    ln -sf "${REL_PROVIDERS}/${2}/${3}" "${ALTERNATIVES}/${2}" || exit 4
 	    exit 0
 	fi
     fi
