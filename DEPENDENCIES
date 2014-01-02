@@ -4,3 +4,16 @@ RUNTIME DEPENDENCIES
 	coreutils
 	filesystem
 
+
+BUILD DEPENDENCIES
+
+	make
+	sed
+	coreutils
+
+
+INSTALL DEPENDENCIES
+
+	make
+	coreutils
+
