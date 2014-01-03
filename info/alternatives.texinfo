@@ -52,6 +52,7 @@ Texts. A copy of the license is included in the section entitled
 @menu
 * Overview::                        Brief overview of @command{alternatives}.
 * Invoking::                        Invocation of @command{alternatives}.
+* Rationale::                       Rationale for @command{alternatives}.
 * GNU Free Documentation License::  Copying and sharing this manual.
 @end menu
 
@@ -144,6 +145,66 @@ An unknown error has occurred.
 @item 5
 @command{alternatives} was not invoked correctly.
 @end table
+
+
+
+@node Rationale
+@chapter Rationale
+
+Some commands, especially those from Unix, do not have their
+own implementations but are instead provided by other programs.
+These commands [without their own implementions] are called
+symbolic commands. A popular example of a symbolic ommand is
+@command{sh}. @command{sh} is a very limited shell, it can be
+provided by the much more powerful shell @command{bash} by
+symbolically (symlinking) @file{/bin/sh} to @file{/bin/bash},
+and @command{bash} will limit itself to POSIX when invoked as
+@command{sh}. But @command{sh} can also be provided by
+@command{dash} which not as powerful as @command{bash} but
+is much faster and uses less memory.
+
+Limiting ourself to @command{bash} and @command{dash} gives
+us two different options for @command{sh} that are suited for
+different needs. Symlinking @file{/bin/sh} to @file{/bin/bash}
+is better for a minimal installation where @command{dash} does
+not need to be installed. Symlinking @file{/bin/sh} to
+@file{/bin/dash}, however, is better for a performance or
+footprint optimised installation where many shell programs
+will run faster and with less memory usage.
+
+To solve this without just selecting for you, GNU/Pony
+implements an alternatives mechanism. By default (since
+@command{bash} is required by @command{dash} is not)
+@command{sh} is provided by @command{bash}, To let you
+easily configure this @file{/bin/sh} is a symlink pointing
+to @file{/etc/alternatives/sh} which can be configures to
+point to the command you want to provide @command{sh}.
+But to make it easier and to allow the package manager to
+automatically configure this when the used provider is
+uninstalled or the symbolic link is first installed,
+@file{/etc/alternatives/sh} points to
+@file{/etc/alternatives.providers/sh/bash}. Where @file{sh}
+(in both @file{/etc/alternatives} and
+@file{/etc/alternatives.providers}) is the symbolic command,
+and @file{bash} is the name of the package, not the command,
+that can provide the symbolic command, and points the that
+packages implementation of the command.
+
+So far we have only taked about commands, but the alternatives
+mechanism can be used on anything, for example man pages. But
+not only that, it can be used on directories which would let
+you configure many related files simultaneously. One could be
+tempated to use this the configure which version of a program
+to use, for example make it possible to select whether
+@command{python} is Python 2 or Python 3, or whether
+@command{java} is Java 6 or Java 7, but that is a mistake.
+Doing so causes confusing where you cannot be sure how a
+command will behave. But it could also mean that a running
+program can run into problems because files it will use
+but have not yet loaded are modified because the user chooses
+to change which version, that may not be backwards compatible,
+to use. Different versions of the same program should have
+different commands.
 
 
 
