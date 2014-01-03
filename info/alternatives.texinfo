@@ -59,7 +59,33 @@ Texts. A copy of the license is included in the section entitled
 @node Overview
 @chapter Overview
 
-Lorem ipsum
+@command{alternatives} is a simple tool for administrating
+@file{/etc/alternatives} using the GNU/Pony filesystem hierarchy.
+This lets you select which package that should provide at
+specific command. Some commands, such as @command{sh}, can be
+provided by multiple packages. For example, @command{bash} can
+be executed as @command{sh}, in which case it will restrict it
+self to POSIX, but other packages such as @command{dash} can
+also be used. @command{alternatives} uses the alternatives
+mechanism built into the filesystem hierarchy to let you select
+which package to use.
+
+Commands @footnote{Commands are most common, but there are not
+actual limitations} in directories such as @file{/bin} and
+@file{/usr/bin} can be installed by multiple packages as symbolic
+links (provided thatt hey are identical). Such links points to
+files with the same base name in @file{/etc/alternatives}. Those
+files are symbolic links setup either manually using
+@command{alternatives} or automatically by the package manager.
+These symbolic links can point to the command that actually
+provide the symbolic command. However, they should point to
+such symbolic links in @file{/etc/alternatives.providers}.
+@file{/etc/alternatives.providers} is a directory populated
+with possible providers for symbolic commands. This directory
+contains directories named as the symbolic commands, each of
+these directories contains symlinks named as packages the
+can provide the command and points to that package's implementation
+of the commnad.
 
 
 
