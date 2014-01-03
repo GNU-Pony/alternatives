@@ -51,6 +51,7 @@ Texts. A copy of the license is included in the section entitled
 
 @menu
 * Overview::                        Brief overview of @command{alternatives}.
+* Invoking::                        Invocation of @command{alternatives}.
 * GNU Free Documentation License::  Copying and sharing this manual.
 @end menu
 
@@ -86,6 +87,63 @@ contains directories named as the symbolic commands, each of
 these directories contains symlinks named as packages the
 can provide the command and points to that package's implementation
 of the commnad.
+
+
+
+@node Invoking
+@chapter Invoking
+
+@command{alternatives} can be invoked in a few ways:
+
+@table @command
+
+@item alternatives list
+List all symbolic commmands that can be configured.
+
+@item alternatives list COMMAND
+List all packages that can provide the specified symbolic command.
+
+@item alternatives get COMMAND
+Get which package and executable that provides symbolic command.
+
+@item alternatives set COMMAND PROVIDER
+Set which package that should provide a symbolic command.
+
+@item alternatives help
+@itemx alternatives --help
+@itemx alternatives -help
+@itemx alternatives -h
+Print information about how to use @command{alternatives}.
+
+@item alternatives version
+@itemx alternatives --version
+@itemx alternatives -version
+@itemx alternatives -v
+Print the name of the program and the installed version.
+
+@item alternatives copying
+@itemx alternatives --copying
+@itemx alternatives -copying
+@itemx alternatives -c
+Print the copyright notice.
+
+@end table
+
+If successful, @command{alternatives} exits with the
+value zero, but on failure it can return either of:
+
+@table @asis
+@item 1
+An expected file did not exist.
+@item 2
+A required symbolic link is broked.
+@item 3
+A required file exists but is not a symbolic link.
+@item 4
+An unknown error has occurred.
+@item 5
+@command{alternatives} was not invoked correctly.
+@end table
 
 
 
