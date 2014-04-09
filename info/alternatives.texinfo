@@ -198,7 +198,7 @@ tempated to use this the configure which version of a program
 to use, for example make it possible to select whether
 @command{python} is Python 2 or Python 3, or whether
 @command{java} is Java 6 or Java 7, but that is a mistake.
-Doing so causes confusing where you cannot be sure how a
+Doing so causes confusion where you cannot be sure how a
 command will behave. But it could also mean that a running
 program can run into problems because files it will use
 but have not yet loaded are modified because the user chooses
