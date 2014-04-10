@@ -71,7 +71,7 @@ elif [ ${#} = 2 ]; then
 	if [ -L "${ALTERNATIVES}/${2}" ]; then
 	    if [ -e "${ALTERNATIVES}/${2}" ]; then
 		provider="$(readlink "${ALTERNATIVES}/${2}")"
-		echo "$(basename "${provider}") -> $(realpath ${provider})"
+		echo "$(basename "${provider}") -> $(realpath "${ALTERNATIVES}/${2}")"
 		exit 0
 	    else
 		echo "${0}: The symlink ${ALTERNATIVES}/${2} is broken" >&2
